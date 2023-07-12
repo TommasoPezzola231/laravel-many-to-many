@@ -25,6 +25,14 @@
                 <option value="{{ $type->id }}" @selected($project->type_id == $type->id)  >{{ $type->name }}</option>
             @endforeach
         </select>
+        
+        <div class="mt-3">Seleziona Tecnologie</div>
+        @foreach ($technologies as $i => $technology)
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{ $technology->id }}" name="technologies[]" id="technologies{{$i}}">
+                <label for="technologies{{$i}}" class="form-check-label">{{ $technology->name }}</label>
+            </div>
+        @endforeach
 
         <label for="content">Contenuto</label>
         @error('content')

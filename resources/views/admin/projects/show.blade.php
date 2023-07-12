@@ -4,6 +4,11 @@
 
     <h2 class="text-center">{{ $project->title }}</h2>
     <h5>Tipo: {{ ($project->type) ? $project->type->name : "Nessuno" }}</h5>
+    <h6>Tecnologie:
+        @foreach ($project["technologies"] as $technology)
+            <span class="badge text-bg-info">{{$technology->name}}</span>
+        @endforeach
+    </h6>
     <div class="w-50 my-2">
         <img src="{{ ($project->image) ? $project->image : "https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png" }}" class="card-img-top" alt="{{ $project->title }}">
     </div>

@@ -7,6 +7,7 @@ use App\Models\Type;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -17,6 +18,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
+
         $projects = Project::all();
         return view("admin.projects.index", compact("projects"));
     }
@@ -29,8 +31,9 @@ class ProjectController extends Controller
     public function create()
 
     {
+        $technologies = Technology::all();
         $types = Type::all();
-        return view("admin.projects.create", compact("types"));
+        return view("admin.projects.create", compact("types", "technologies"));
     }
 
     /**
@@ -46,6 +49,8 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->fill($data);
         $newProject->save();
+
+        $newProject->technologies()->attach($data['technologies']);
 
         return to_route('admin.projects.index', $newProject->id);
     }
@@ -69,8 +74,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $technologies = Technology::all();
         $types = Type::all();
-        return view("admin.projects.edit", compact("project", "types"));
+        
+        return view("admin.projects.edit", compact("project", "types", "technologies"));
     }
 
     /**
@@ -86,6 +93,8 @@ class ProjectController extends Controller
 
         $project->fill($data);
         $project->update();
+
+        $project->technologies()->sync($data['technologies']);
 
         return to_route("admin.projects.show", $project->id);
     }
