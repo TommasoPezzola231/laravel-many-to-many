@@ -29,7 +29,7 @@
         <div class="mt-3">Seleziona Tecnologie</div>
         @foreach ($technologies as $i => $technology)
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="{{ $technology->id }}" name="technologies[]" id="technologies{{$i}}">
+                <input class="form-check-input" type="checkbox" @checked(count($project->technologies->where("id", $technology->id))) value="{{ $technology->id }}" name="technologies[]" id="technologies{{$i}}">
                 <label for="technologies{{$i}}" class="form-check-label">{{ $technology->name }}</label>
             </div>
         @endforeach
