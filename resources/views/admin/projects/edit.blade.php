@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form action="{{ route("admin.projects.update", $project->id) }}" method="POST">
+    <form action="{{ route("admin.projects.update", $project->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         @method("PUT")
@@ -40,11 +40,11 @@
         @enderror
         <input class="form-control @error('description') is-invalid @enderror" type="text" name="content" value="{{ old("content") ?? $project->content}}" required>
 
-        <label for="img">URL immagine</label>
+        <label for="image">URL immagine</label>
         @error('image')
             <div class="bg-danger-subtle rounded">{{$message}}</div>  
         @enderror
-        <input class="form-control @error('description') is-invalid @enderror" type="text" name="img" value="{{ old("image") ?? $project->image}}">
+        <input type="file" class="form-control" name="image" id="image">
 
         <input class="btn btn-primary my-2" type="submit" value="Aggiorna">
     
