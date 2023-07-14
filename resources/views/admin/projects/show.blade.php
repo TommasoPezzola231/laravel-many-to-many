@@ -5,12 +5,16 @@
     <h2 class="text-center">{{ $project->title }}</h2>
     <h5>Tipo: {{ ($project->type) ? $project->type->name : "Nessuno" }}</h5>
     <h6>Tecnologie:
-        @foreach ($project["technologies"] as $technology)
+
+        @forelse ($project["technologies"] as $technology)
             <span class="badge text-bg-info">{{$technology->name}}</span>
-        @endforeach
+        @empty
+            <span class="badge text-bg-danger">Nessuna</span>
+        @endforelse
+        
     </h6>
     <div class="w-50 my-2">
-        <img src="{{ ($project->image) ? $project->image : "https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png" }}" class="card-img-top" alt="{{ $project->title }}">
+        <img src="{{ ($project['image']) ? asset('storage/' . $project->image) : "https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png" }}" class="card-img-top" alt="{{ $project->title }}">
     </div>
     <p>{{ $project->content }}</p>
 

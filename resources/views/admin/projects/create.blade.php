@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form action="{{ route("admin.projects.store") }}" method="POST">
+    <form action="{{ route("admin.projects.store") }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <h2>Aggiungi progetto</h2>
@@ -11,7 +11,7 @@
         @error('title')
             <div class="bg-danger-subtle rounded">{{$message}}</div>  
         @enderror
-        <input class="form-control @error('description') is-invalid @enderror" type="text" name="title" value="{{ old('title') }}" required>
+        <input class="form-control" type="text" name="title" value="{{ old('title') }}" required>
 
         <label for="type_id">Tipo</label>
         @error('type_id')
@@ -36,13 +36,13 @@
         @error('content')
             <div class="bg-danger-subtle rounded">{{$message}}</div>  
         @enderror
-        <input class="form-control @error('description') is-invalid @enderror" type="text" name="content" value="{{ old('content') }}" required>
+        <input class="form-control" type="text" name="content" value="{{ old('content') }}" required>
 
-        <label for="img">URL immagine</label>
+        <label for="image">URL immagine</label>
         @error('image')
             <div class="bg-danger-subtle rounded">{{$message}}</div>  
         @enderror
-        <input class="form-control @error('description') is-invalid @enderror" type="text" name="img" value="{{ old('image') }}">
+        <input type="file" class="form-control" name="image" id="image">
 
         <input class="btn btn-primary my-2" type="submit" value="Crea">
     
